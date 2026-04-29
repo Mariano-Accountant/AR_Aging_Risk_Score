@@ -1,37 +1,47 @@
 # AR Aging & Risk Score Analysis
-> Mariano Jacquet | Project 03 of 10
+Automated accounts receivable aging report built with Power Query in Excel. Drop a new monthly file into the folder, hit Refresh, and get an updated aging analysis instantly.
 
-Automated AR aging report using **Power Query**. Consolidates monthly receivables data, calculates days past due, and classifies invoices by seniority buckets. Drop a new file → Refresh → done.
+## What it does
+- Reads all `.xlsx` files from a folder automatically
+- Extracts the closing date from each filename
+- Calculates Days Past Due per invoice
+- Classifies invoices into seniority buckets
+- Generates a Pivot Table by Customer × Seniority
+- Refreshes automatically when new monthly files are added
 
-## Process
+## Seniority Buckets
 
-1. Power Query reads all `.xlsx` files from a folder automatically
-2. Extracts closing date from filename
-3. Calculates Days Past Due = Closing Date − Due Date
-4. Classifies into buckets: Current, 0–30, 31–90, 91–365, >1 year
-5. Outputs a Pivot Table by Customer × Seniority
+| Bucket | Days Past Due |
+|--------|--------------|
+| Current | Not yet due |
+| 0 – 30 | 0 to 30 days |
+| 31 – 90 | 31 to 90 days |
+| 91 – 365 | 91 to 365 days |
+| Greater than 1 year | > 365 days |
+
+## Power Query transformations applied
+- Consolidate multiple files from folder
+- Promote headers and filter duplicates
+- Split filename to extract period (MM-YYYY)
+- Calculate End of Month as Closing Date
+- Date subtraction for Days Past Due
+- Conditional column for Seniority classification
+- Type conversions and column cleanup
+
+## Tools
+Excel 365 · Power Query · Pivot Tables
+
+## How to use monthly
+1. Drop the new month's `.xlsx` file into the AR_Aging folder
+2. Open `AR_Aging_Analysis.xlsx`
+3. Data → Refresh All
+4. Pivot Table updates automatically
 
 **Total validated:** 6,882,195,730 across 3,358 invoices (Jan–Mar 2021).
 
-## Tools
-
-Excel 365 · Power Query
-
-## Files
-
-| File | Description |
-|------|-------------|
-| `data/AR_Aging_01-03_2021.xlsx` | Monthly AR extracts (×3) |
-| `excel/AR_Aging_Analysis.xlsx` | Consolidated report with Pivot Table |
-| `powerquery/AR_Aging_Query.m` | Power Query code |
-
 ## Next Steps
-
-- [ ] Add Risk Score (1–4) and Risk Label columns
-- [ ] Power BI dashboard with KPI cards and conditional formatting
+- [ ] Add Risk Score (1–4) and Risk Label (Low/Medium/High/Critical) columns
 
 ## Author
+**Mariano Jacquet** — [LinkedIn](https://www.linkedin.com/in/mariano-jacquet)
 
-**Mariano Jacquet** — Finance Data Analyst | International Accounting & Tax
-
-GitHub: [github.com/Mariano-Accountant](https://github.com/Mariano-Accountant)
